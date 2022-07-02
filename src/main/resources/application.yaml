@@ -6,5 +6,5 @@ spring:
       #username: Bhargo_RO
       #password:
       #set while building the image using docker
-      uri: mongodb://Bhargo_RO:M0ngo#2000@ds163182.mlab.com:63182/mongoml
-      database: mongoml
+      uri: mongodb+srv://MovieUser:<pwd>@cloudplaygroundcluster.lxuiq.mongodb.net/MovieDB
+      database: MovieDB

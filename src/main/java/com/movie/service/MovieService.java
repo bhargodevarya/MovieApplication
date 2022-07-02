@@ -4,7 +4,6 @@ import com.movie.repo.MovieRepo;
 import com.movie.model.dao.Movie;
 import com.movie.model.response.MovieResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,13 +12,10 @@ import java.util.stream.Collectors;
 @Component
 public class MovieService {
 
-    private MongoTemplate mongoTemplate;
-
     private MovieRepo movieRepo;
 
     @Autowired
-    public MovieService(MongoTemplate mongoTemplate, MovieRepo movieRepo) {
-        this.mongoTemplate = mongoTemplate;
+    public MovieService(MovieRepo movieRepo) {
         this.movieRepo = movieRepo;
     }
 
@@ -33,5 +29,9 @@ public class MovieService {
     public MovieResponse getByTitle(String name) {
         Movie movie = movieRepo.findByTitle(name);
         return new MovieResponse(movie.getTitle(), movie.getGenres(),movie.getYear());
+    }
+
+    public Movie createMovie(Movie movie) {
+        return movieRepo.save(movie);
     }
 }
