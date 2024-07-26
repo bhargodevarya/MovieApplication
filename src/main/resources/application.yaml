@@ -1,13 +1,13 @@
 spring:
-  data:
-    mongodb:
+  #data:
+    #mongodb:
       #host: ds163182.mlab.com
       #port: 63182
       #username: Bhargo_RO
       #password:
       #set while building the image using docker
-      uri: mongodb+srv://<username>:<pwd>@cloudplaygroundcluster.xvnxrks.mongodb.net/
-      database: sample_mflix
+      #uri: mongodb+srv://<username>:<pwd>@cloudplaygroundcluster.xvnxrks.mongodb.net/
+      #database: sample_mflix
   cloud:
     compatibility-verifier:
       enabled: false

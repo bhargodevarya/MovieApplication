@@ -1,19 +1,16 @@
 package com.movie;
 
-import com.movie.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
-@SpringBootApplication(exclude = GsonAutoConfiguration.class)
-@EnableMongoRepositories
+@SpringBootApplication(exclude = {GsonAutoConfiguration.class, MongoAutoConfiguration.class})
+//@EnableMongoRepositories
 public class MovieApplication implements CommandLineRunner {
 
-    @Autowired
-    private MovieService movieService;
 
     public static void main(String[] args) {
         SpringApplication.run(MovieApplication.class, args);
@@ -22,6 +19,6 @@ public class MovieApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(movieService.getByTitle("A Corner in Wheat"));
+        //System.out.println(movieService.getByTitle("A Corner in Wheat"));
     }
 }

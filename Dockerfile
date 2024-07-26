@@ -1,5 +1,5 @@
-FROM openjdk:11
-
+#FROM openjdk:11
+FROM azul/zulu-openjdk:11.0.24-jdk
 #passed while building image, not a proper way
 #ARG mongo_username
 #ARG mongo_password
