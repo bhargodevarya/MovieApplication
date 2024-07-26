@@ -1,21 +1,49 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '2.7.1'
+    id "com.palantir.git-version" version "3.1.0"
 }
 
 group 'org.movielens'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.1'
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+task createVersion {
+    project.version = versionDetails().gitHash
+}
+
+task createProperties {
+    doLast {
+        def details = versionDetails()
+        new File("$buildDir/resources/main/version.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['version'] = project.version.toString()
+            //p['gitLastTag'] = details.lastTag
+            //p['gitCommitDistance'] = details.commitDistance.toString()
+            p['gitHash'] = details.gitHash.toString()
+            //p['gitHashFull'] = details.gitHashFull.toString() // full 40-character Git commit hash
+            //p['gitBranchName'] = details.branchName // is null if the repository in detached HEAD mode
+            //p['gitIsCleanTag'] = details.isCleanTag.toString()
+            p.store w, null
+        }
+    }
+}
+
+//build {
+//    dependsOn createProperties
+//}
+
+bootBuildImage {
+    imageName = "bhargodevarya/movie-application:demo"
 }
 
 test {

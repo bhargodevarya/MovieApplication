@@ -1,16 +1,14 @@
 package com.movie;
 
-import com.movie.model.dao.Movie;
 import com.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.List;
-
-@SpringBootApplication
+@SpringBootApplication(exclude = GsonAutoConfiguration.class)
 @EnableMongoRepositories
 public class MovieApplication implements CommandLineRunner {
 
@@ -24,7 +22,6 @@ public class MovieApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Movie movie = movieService.createMovie(new Movie("added", List.of("Comedy"), 2022));
-        System.out.println(movie);
+        System.out.println(movieService.getByTitle("A Corner in Wheat"));
     }
 }
