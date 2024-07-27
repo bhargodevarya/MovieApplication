@@ -1,50 +1,20 @@
-#apiVersion: v1
-#kind: Pod
-#metadata:
-#  name: movieapp-pod
-#  namespace: default
-#  labels:
-#    app: movieapp-pod
-#spec:
-#  containers:
-#  - name: movieapp
-#    image: "bhargodevarya/movieapplication:1.0"
-#    resources:
-#      limits:
-#        cpu: 200m
-#        memory: 500Mi
-#      requests:
-#        cpu: 100m
-#        memory: 200Mi
-#    ports:
-#    - containerPort:  8080
-#      name:  http
-#    volumeMounts:
-#    - name: localtime
-#      mountPath: /etc/localtime
-#  volumes:
-#    - name: localtime
-#      hostPath:
-#        path: /usr/share/zoneinfo/Asia/Shanghai
-#  restartPolicy: Always
-#---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: movieapp-service
-#  namespace: default
-#spec:
-#  selector:
-#    app: movieapp-pod
-#  type: NodePort
-#  ports:
-#  - name: movieapp
-#    protocol: TCP
-#    port: 8080
-#    targetPort: 8080
+apiVersion: v1
+kind: Service
+metadata:
+  name: movieapp-service
+  namespace: default
+spec:
+  selector:
+    app: movieapp
+  type: NodePort
+  ports:
+  - name: movieapp
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
 
-#---
-#
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -74,13 +44,6 @@ spec:
       containers:
       - name:  movieapp
         image:  "bhargodevarya/movieapplication:1.0"
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 100m
-            memory: 100Mi
         livenessProbe:
           httpGet:
             port: 8080
