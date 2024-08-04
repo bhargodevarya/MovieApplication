@@ -43,3 +43,4 @@ bin/
 .DS_Store
 
 creds
+/src/main/resources/sample_mflix.movies.json

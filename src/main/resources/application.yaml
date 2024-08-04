@@ -6,8 +6,15 @@ spring:
       #username: Bhargo_RO
       #password:
       #set while building the image using docker
-      uri: mongodb+srv://<username>:<pwd>@cloudplaygroundcluster.xvnxrks.mongodb.net/
+      uri: mongodb+srv://MovieUser:1JlJUTQvbpu3n5hX@cloudplaygroundcluster.xvnxrks.mongodb.net/
       database: sample_mflix
   cloud:
     compatibility-verifier:
       enabled: false
+
+application:
+  config:
+    data:
+      source:
+        type: file
+        name: sample_mflix.movies.json
