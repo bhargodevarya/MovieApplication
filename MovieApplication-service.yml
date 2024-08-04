@@ -60,3 +60,13 @@ spec:
           name:  movieapp-port
           hostPort: 8080
       restartPolicy: Always
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongo
+spec:
+  type: ExternalName
+  externalName: cloudplaygroundcluster.xvnxrks.mongodb.net
